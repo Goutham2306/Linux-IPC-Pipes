@@ -1,11 +1,11 @@
-# Linux-Process-API-fork-wait-exec-
-Ex02-Linux Process API-fork(), wait(), exec()
-# Ex02-OS-Linux-Process API - fork(), wait(), exec()
-Operating systems Lab exercise
+# Linux-IPC--Pipes
+Linux-IPC-Pipes
 
+
+# Ex03-Linux IPC - Pipes
 
 # AIM:
-To write C Program that uses Linux Process API - fork(), wait(), exec()
+To write a C program that illustrate communication between two process using unnamed and named pipes
 
 # DESIGN STEPS:
 
@@ -15,101 +15,94 @@ Navigate to any Linux environment installed on the system or installed inside a 
 
 ### Step 2:
 
-Write the C Program using Linux Process API - fork(), wait(), exec()
+Write the C Program using Linux Process API - pipe(), fifo()
 
 ### Step 3:
 
-Test the C Program for the desired output. 
+Testing the C Program for the desired output. 
 
 # PROGRAM:
+### DEVELOPED BY: D.B.V. SAI GANESH
+## REG.NO:212223240025
 
-## C Program to print process ID and parent Process ID using Linux API system calls
-
+## C Program that illustrate communication between two process using unnamed pipes using Linux API system calls
 ```
+#include<stdio.h>
+#include<stdlib.h>
+#include<sys/types.h> 
+#include<sys/stat.h> 
+#include<string.h> 
+#include<fcntl.h> 
+#include<unistd.h>
+#include<sys/wait.h>
+void server(int,int); 
+void client(int,int); 
+int main() 
+{ 
+int p1[2],p2[2],pid, *waits; 
+pipe(p1); 
+pipe(p2); 
+pid=fork(); 
+if(pid==0) { 
+close(p1[1]); 
+close(p2[0]); 
+server(p1[0],p2[1]); return 0;
+ } 
+close(p1[0]); 
+close(p2[1]); 
+client(p1[1],p2[0]); 
+wait(waits); 
+return 0; 
+} 
 
+void server(int rfd,int wfd) 
+{ 
+int i,j,n; 
+char fname[2000]; 
+char buff[2000];
+n=read(rfd,fname,2000);
+fname[n]='\0';
+int fd=open(fname,O_RDONLY);
+sleep(10); 
+if(fd<0) 
+write(wfd,"can't open",9); 
+else 
+n=read(fd,buff,2000); 
+write(wfd,buff,n); 
+}
+void client(int wfd,int rfd) {
+int i,j,n; char fname[2000];
+char buff[2000];
+printf("ENTER THE FILE NAME :");
+scanf("%s",fname);
+printf("CLIENT SENDING THE REQUEST .... PLEASE WAIT\n");
+sleep(10);
+write(wfd,fname,2000);
+n=read(rfd,buff,2000);
+buff[n]='\0';
+printf("THE RESULTS OF CLIENTS ARE ...... \n"); write(1,buff,n);
+}
+```
+## OUTPUT
+![326336508-4337ac4c-c776-4b23-ab83-c03c26d5b372](https://github.com/Goutham2306/Linux-IPC-Pipes/assets/138971154/59f1b385-ab23-4dca-9837-e6895e05f84a)
 
+## C Program that illustrate communication between two process using named pipes using Linux API system calls
+```
+#include <unistd.h>
+#include <stdlib.h>
 #include <stdio.h>
 #include <sys/types.h>
-#include <unistd.h>
-int main(void)
-{	//variable to store calling function's process id
-	pid_t process_id;
-	//variable to store parent function's process id
-	pid_t p_process_id;
-	//getpid() - will return process id of calling function
-	process_id = getpid();
-	//getppid() - will return process id of parent function
-	p_process_id = getppid();
-	//printing the process ids
-
-//printing the process ids
-	printf("The process id: %d\n",process_id);
-	printf("The process id of parent function: %d\n",p_process_id);
-	return 0; }
-
-
-
-```
-## OUTPUT
-
-![318005559-15c28aa0-5670-494a-b712-b36aa2dbf1d5](https://github.com/Goutham2306/Linux-IPC-Pipes/assets/138971154/5527e132-7386-4276-b8b1-b7fc275a017c)
-
-
-## C Program to create new process using Linux API system calls fork() and exit()
-```
-//C Program to create new process using Linux API system calls fork() and exit()
-#include <stdlib.h>
-#include <sys/wait.h>
-#include<stdio.h>
-#include<unistd.h>
-#include <sys/types.h>
-int main()
-{ int pid; 
-pid=fork(); 
-if(pid == 0) 
-{ printf("Iam child my pid is %d\n",getpid()); 
-printf("My parent pid is:%d\n",getppid()); 
-exit(0); } 
-else{ 
-printf("I am parent, my pid is %d\n",getpid()); 
-sleep(100); 
-exit(0);} 
+#include <sys/stat.h>
+int main(){
+int res = mkfifo("/tmp/my_fifo", 0777);
+if (res == 0) printf("FIFO created\n");
+exit(EXIT_SUCCESS);
 }
-
 ```
 ## OUTPUT
-![318005539-9134c939-35d8-4ea7-aa05-ede6f1bd49fe](https://github.com/Goutham2306/Linux-IPC-Pipes/assets/138971154/8caea8d3-f5ac-4aba-8f89-96fcdfca2606)
+![Uploading 326336562-4967dac4-f78f-40f9-8efe-5a9f91b5770f.png…]()
 
-
-## C Program to execute Linux system commands using Linux API system calls exec() family
-```
-//C Program to create new process using Linux API system calls fork() and exit()
-#include <stdlib.h>
-#include <sys/wait.h>
-#include<stdio.h>
-#include<unistd.h>
-#include <sys/types.h>
-int main()
-{ int pid; 
-pid=fork(); 
-if(pid == 0) 
-{ printf("Iam child my pid is %d\n",getpid()); 
-printf("My parent pid is:%d\n",getppid()); 
-exit(0); } 
-else{ 
-printf("I am parent, my pid is %d\n",getpid()); 
-sleep(100); 
-exit(0);} 
-}
-
-```
-
-## OUTPUT
-
-![318005585-662799cb-b088-4a2a-894d-4cbba685d1e2](https://github.com/Goutham2306/Linux-IPC-Pipes/assets/138971154/745a091a-f7d9-4027-b0f4-4d1081042a20)
 
 
 # RESULT:
-The programs are executed successfully.
-
-
+The program is executed successfully.
