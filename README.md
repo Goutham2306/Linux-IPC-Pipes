@@ -100,7 +100,8 @@ exit(EXIT_SUCCESS);
 }
 ```
 ## OUTPUT
-![Uploading 326336562-4967dac4-f78f-40f9-8efe-5a9f91b5770f.png…]()
+![326336562-4967dac4-f78f-40f9-8efe-5a9f91b5770f](https://github.com/Goutham2306/Linux-IPC-Pipes/assets/138971154/348821d1-e76f-484b-8e49-f2e2974591d2)
+
 
 
 
