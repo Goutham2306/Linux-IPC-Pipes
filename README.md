@@ -52,7 +52,8 @@ int main(void)
 ```
 ## OUTPUT
 
-![image](https://github.com/saiganesh2006/Linux-Process-API-fork-wait-exec/assets/145742342/15c28aa0-5670-494a-b712-b36aa2dbf1d5)
+![318005559-15c28aa0-5670-494a-b712-b36aa2dbf1d5](https://github.com/Goutham2306/Linux-IPC-Pipes/assets/138971154/5527e132-7386-4276-b8b1-b7fc275a017c)
+
 
 ## C Program to create new process using Linux API system calls fork() and exit()
 ```
@@ -77,7 +78,7 @@ exit(0);}
 
 ```
 ## OUTPUT
-![image](https://github.com/saiganesh2006/Linux-Process-API-fork-wait-exec/assets/145742342/9134c939-35d8-4ea7-aa05-ede6f1bd49fe)
+![318005539-9134c939-35d8-4ea7-aa05-ede6f1bd49fe](https://github.com/Goutham2306/Linux-IPC-Pipes/assets/138971154/8caea8d3-f5ac-4aba-8f89-96fcdfca2606)
 
 
 ## C Program to execute Linux system commands using Linux API system calls exec() family
@@ -105,7 +106,8 @@ exit(0);}
 
 ## OUTPUT
 
-![image](https://github.com/saiganesh2006/Linux-Process-API-fork-wait-exec/assets/145742342/662799cb-b088-4a2a-894d-4cbba685d1e2)
+![318005585-662799cb-b088-4a2a-894d-4cbba685d1e2](https://github.com/Goutham2306/Linux-IPC-Pipes/assets/138971154/745a091a-f7d9-4027-b0f4-4d1081042a20)
+
 
 # RESULT:
 The programs are executed successfully.
